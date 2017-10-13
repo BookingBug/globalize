@@ -78,7 +78,7 @@ class ValidationsTest < Test::Unit::TestCase
   test "validates_uniqueness_of (basic tests)" do
     Validatee.class_eval { validates_uniqueness_of :string }
     # make sure Validatee and Validatee::Translation table ids are not the same (for tests)
-    10.times { Validatee::Translation.create :locale => "en" }
+    10.times { Validatee::DynamicTranslation.create :locale => "en" }
     validatee = Validatee.create!(:string => 'a')
 
     #create

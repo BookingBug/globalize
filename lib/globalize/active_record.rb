@@ -7,7 +7,7 @@ module Globalize
     autoload :Exceptions,      'globalize/active_record/exceptions'
     autoload :InstanceMethods, 'globalize/active_record/instance_methods'
     autoload :Migration,       'globalize/active_record/migration'
-    autoload :Translation,     'globalize/active_record/translation'
+    autoload :DynamicTranslation,     'globalize/active_record/dynamic_translation'
     autoload :QueryMethods,    'globalize/active_record/query_methods'
   end
 end

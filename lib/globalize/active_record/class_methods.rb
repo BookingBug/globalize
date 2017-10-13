@@ -40,9 +40,9 @@ module Globalize
 
       def translation_class
         @translation_class ||= begin
-          klass = self.const_get(:Translation) rescue nil
-          if klass.nil? || klass.class_name != (self.class_name + "Translation")
-            klass = self.const_set(:Translation, Class.new(Globalize::ActiveRecord::Translation))
+          klass = self.const_get(:DynamicTranslation) rescue nil
+          if klass.nil? || klass.class_name != (self.class_name + "DynamicTranslation")
+            klass = self.const_set(:DynamicTranslation, Class.new(Globalize::ActiveRecord::DynamicTranslation))
           end
 
           klass.belongs_to :globalized_model, :class_name => self.name, :foreign_key => translation_options[:foreign_key], :touch => true

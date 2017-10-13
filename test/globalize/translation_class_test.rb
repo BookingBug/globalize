@@ -2,15 +2,15 @@ require File.expand_path('../../test_helper', __FILE__)
 
 class TranslationClassTest < Test::Unit::TestCase
   test 'translation_class returns the Translation class' do
-    assert_equal Post::Translation, Post.translation_class
+    assert_equal Post::DynamicTranslation, Post.translation_class
   end
 
   test 'defines a Translation class nested in the model class' do
-    assert Post.const_defined?(:Translation)
+    assert Post.const_defined?(:DynamicTranslation)
   end
 
   test 'defines a belongs_to association' do
-    assert_belongs_to Post::Translation, :globalized_model
+    assert_belongs_to Post::DynamicTranslation, :globalized_model
   end
 
   test 'defines a belongs_to association for abstracted class' do
@@ -19,13 +19,13 @@ class TranslationClassTest < Test::Unit::TestCase
   end
 
   test 'defines a reader for :locale that returns a symbol' do
-    post = Post::Translation.new
+    post = Post::DynamicTranslation.new
     post.send(:write_attribute, 'locale', 'de')
     assert_equal :de, post.locale
   end
 
   test 'defines a write for :locale that writes a string' do
-    post = Post::Translation.new
+    post = Post::DynamicTranslation.new
     post.locale = :de
     assert_equal 'de', post.read_attribute('locale')
   end
@@ -67,11 +67,9 @@ class TranslationClassTest < Test::Unit::TestCase
   end
 
   test "valid translations must have an assoicated (non-empty) locale" do
-    assert !Post::Translation.new.valid?
-    assert !Post::Translation.new(:locale => nil).valid?
-    assert !Post::Translation.new(:locale => '').valid?
-    assert Post::Translation.new(:locale => 'de').valid?
+    assert !Post::DynamicTranslation.new.valid?
+    assert !Post::DynamicTranslation.new(:locale => nil).valid?
+    assert !Post::DynamicTranslation.new(:locale => '').valid?
+    assert Post::DynamicTranslation.new(:locale => 'de').valid?
   end
 end
-
-

@@ -7,7 +7,7 @@ class TranslationForTest < Test::Unit::TestCase
     post = Post.create(:title => 'title', :content => 'content', :locale => :en)
     post.update_attributes(:title => 'Titel', :content => 'Inhalt', :locale => :de)
 
-    assert_equal Post::Translation, post.translation_for(:en).class
+    assert_equal Post::DynamicTranslation, post.translation_for(:en).class
     assert_equal 'title', post.translation_for(:en).title
     assert_equal 'content', post.translation_for(:en).content
     assert_equal 'Titel', post.translation_for(:de).title
@@ -18,11 +18,9 @@ class TranslationForTest < Test::Unit::TestCase
     post = Post.create(:title => 'title', :content => 'content', :locale => :en)
     post.update_attributes(:title => 'Titel', :content => 'Inhalt', :locale => :de)
 
-    assert_equal Post::Translation, post.translation.class
+    assert_equal Post::DynamicTranslation, post.translation.class
     assert_equal Globalize.locale, post.translation.locale
     assert_equal 'title', post.translation.title
     assert_equal 'content', post.translation.content
   end
 end
-
-
