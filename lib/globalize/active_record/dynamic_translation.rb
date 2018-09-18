@@ -1,6 +1,6 @@
 module Globalize
   module ActiveRecord
-    class Translation < ::ActiveRecord::Base
+    class DynamicTranslation < ::ActiveRecord::Base
 
       validates :locale, :presence => true
 
@@ -42,4 +42,4 @@ end
 # format.
 #
 # See http://www.ruby-forum.com/topic/159894 for details.
-Globalize::ActiveRecord::Translation.abstract_class = true
+Globalize::ActiveRecord::DynamicTranslation.abstract_class = true

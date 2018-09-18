@@ -168,7 +168,7 @@ module Globalize
 
         def clear_schema_cache!
           connection.schema_cache.clear! if connection.respond_to? :schema_cache
-          model::Translation.reset_column_information
+          model::DynamicTranslation.reset_column_information
           model.reset_column_information
         end
 
@@ -177,7 +177,7 @@ module Globalize
         def add_missing_columns
           translated_attribute_names.map(&:to_s).each do |attribute|
             unless model.column_names.include?(attribute)
-              connection.add_column(table_name, attribute, model::Translation.columns_hash[attribute].type)
+              connection.add_column(table_name, attribute, model::DynamicTranslation.columns_hash[attribute].type)
             end
           end
         end

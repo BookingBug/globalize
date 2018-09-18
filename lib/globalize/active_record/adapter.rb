@@ -92,7 +92,6 @@ module Globalize
       end
 
       delegate :fallbacks_for_empty_translations?, :to => :record, :prefix => false
-      include AdapterDirty
     end
   end
 end
